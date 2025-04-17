@@ -1,0 +1,143 @@
+/* Universal styles */
+:root {
+  --text-color: #181f3a;
+  --accent-color-blue: #8acdea;
+  --accent-color-vanilla: #f0e2a3;
+  --bg-light: #fafeff;
+}
+
+/* Items to be hidden */
+.hidden {
+  display: none;
+}
+
+/* body styles */
+body {
+  font-family: "Catamaran", sans-serif;
+  background: var(--bg-light);
+  color: var(--text-color);
+}
+
+/* header styles */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Montserrat", sans-serif;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+/* general text styles */
+p {
+  font-size: 17px;
+}
+
+/* button styles */
+.btn {
+  color: var(--text-color);
+  font-weight: bold;
+  background-color: var(--accent-color-blue);
+  font-size: 18px;
+}
+
+.btn:hover {
+  color: var(--text-color);
+  background-color: var(--accent-color-vanilla);
+}
+
+.close-btn {
+  background-color: lightgray;
+}
+
+/* Navbar styles */
+.navbar {
+  background: var(--bg-light);
+}
+
+.navbar-brand {
+  width: 200px;
+}
+
+.navbar-toggler {
+  border-color: var(--text-color);
+}
+
+.nav-link {
+  font-weight: bold;
+  font-size: large;
+}
+
+/* Jumbotron styles*/
+.jumbotron {
+  background-image: url("../images/header-image.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  min-height: 100%;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* header text */
+.main-header-text {
+  text-shadow: 2px 2px var(--accent-color-blue);
+}
+
+.main-header-text:hover {
+  color: var(--accent-color-vanilla);
+  text-shadow: 2px 2px var(--text-color);
+}
+/* subheader text */
+.lead {
+  margin-top: -15px;
+  color: var(--accent-color-vanilla);
+  text-shadow: 1px 1px var(--text-color);
+}
+
+/* Weather widget styles */
+.weather-icon {
+  width: 50px;
+  height: 50px;
+}
+
+.weather-widget,
+.modal-button-section,
+.pastWorkoutCards {
+  background: linear-gradient(to top, white 0%, #8acdea 100%);
+}
+
+/* custom workout slider styles */
+.carousel-control-next,
+.carousel-control-prev {
+  border: 0px !important;
+  background: none !important;
+}
+
+.carousel-control-next-icon,
+.carousel-control-prev-icon {
+  background-color: var(--text-color);
+  border-radius: 10px;
+}
+
+/* wheelchair racing gifs sizing */
+#exercise-gif0,
+#exercise-gif1,
+#exercise-gif2,
+#pastGif {
+  max-width: 320px;
+}
+
+/* past workout cards styles */
+.pastWorkoutCards {
+  height: 10rem;
+}
+
+.pastExerciseTitles {
+  font-size: 18px;
+}
