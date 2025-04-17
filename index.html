@@ -1,448 +1,351 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Fit Forecast - Workout Generator</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Catamaran:wght@400&family=Montserrat:wght@600&display=swap"
-      rel="stylesheet"
-    /> 
-    <link
-      rel="icon"
-      type="image/x-icon"
-      href="assets/images/favicon-fitforecast.png"
-    />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <script src="./assets/js/jquery-3.7.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-      crossorigin="anonymous"
-    />
+  <title>Fit Forecast - Workout Generator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@400&family=Montserrat:wght@600&display=swap"
+    rel="stylesheet" />
+  <link rel="icon" type="image/x-icon" href="assets/images/favicon-fitforecast.png" />
 
-    <link rel="stylesheet" href="./assets/css/styles.css" />
-  </head>
+  <script src="./assets/js/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
 
-  <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary navbar-light">
-      <div class="container-fluid">
-        <span
-          ><img
-            class="navbar-brand"
-            src="./assets/images/logo-transparent.png"
-            alt="App logo"
-        /></span>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
+  <link rel="stylesheet" href="./assets/css/styles.css" />
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg bg-body-tertiary navbar-light">
+    <div class="container-fluid">
+      <span><img class="navbar-brand" src="./assets/images/logo-transparent.png" alt="App logo" /></span>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+        <ul class="navbar-nav mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">HOME</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#get-workout">GENERATE WORKOUT</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#past-workout">PAST WORKOUT</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <section class="hero-banner">
+    <div class="jumbotron jumbotron-fluid text-center">
+      <div class="container">
+        <h1 class="display-4 main-header-text">
+          FITNESS, NO MATTER THE FORECAST
+        </h1>
+        <p class="lead">
+          <i>Be Unstoppable with Fit Forecast</i>
+        </p>
+      </div>
+    </div>
+  </section>
+  <main class="container-fluid">
+    <div class="row justify-content-center">
+      <aside class="card col-md-3 col-sm-12 weather-widget m-1">
+        <h2>The Weather Today</h2>
+        <!-- City name and today's date to be replaced dynamically in JS -->
+        <p>
+          <span class="city-name" id="city-name">London</span>,
+          <span class="today-date" id="today-date">01/01/2001</span>
+        </p>
+        <div class="weather-data">
+          <img src="https://media.tenor.com/JBgYqrobdxsAAAAi/loading.gif" alt="loading default" id="weather-icon"
+            class="weather-icon" />
+          <p id="temperature"></p>
+          <p id="humidity"></p>
+          <p id="wind"></p>
+
+          <!-- Boostrap form with one input field and submit/search button for custom location input -->
+          <form id="search-form" class="form">
+            <div class="form-inline form-group">
+              <div class="input-group d-flex flex-column justify-content-sm-around col-sm-12">
+                <input class="form-input weather-search" type="text" id="search-input"
+                  placeholder="Add your city manually" aria-controls="today forecast" />
+                <div class="input-group-append mt-3">
+                  <button type="submit" class="btn search-button w-100" id="search-button" aria-label="submit search">
+                    Search
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+          <!-- create weather icon dynamically in JS -->
+          <!-- create list items to display temperature and precipitation % dynamically in JS -->
+        </div>
+      </aside>
+      <div class="card col-md-8 col-sm-12 modal-button-section m-1" id="get-workout">
+        <h2>Generate your own workout based on the weather forecast...</h2>
+        <p>
+          For the busy professional seeking a fitness revolution, our app is
+          the key.
+          <br />
+          <br />
+          Tailored for fitness beginners and improvers who are tired of
+          weather excuses, it delivers personalized workouts anytime, anywhere
+          you may find yourself, based on the weather forecast. Whether it's
+          pouring cats and dogs, or boasting with sunshine, our innovative
+          solution helps you stay on track so you never miss a beat on your
+          fitness journey.
+          <br />
+          <br />
+          It's not just a workout; it's a commitment to your well-being.
+          Embrace a convenient, weather-proof fitness journey and gain more
+          than strength. Gain control over your health, no matter the
+          forecast.
+          <strong>Your fitness, your terms: start your unstoppable journey today.
+          </strong>
+        </p>
+
+        <!-- MODAL TRIGGER BUTTON -->
+        <button id="generateWorkoutBTN" type="button" class="btn modal-trigger-btn" data-toggle="modal"
+          data-target="#modalDry">
+          Generate Workout
         </button>
-        <div
-          class="collapse navbar-collapse justify-content-end"
-          id="navbarSupportedContent"
-        >
-          <ul class="navbar-nav mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">HOME</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#get-workout">GENERATE WORKOUT</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#past-workout">PAST WORKOUT</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <section class="hero-banner">
-      <div class="jumbotron jumbotron-fluid text-center">
-        <div class="container">
-          <h1 class="display-4 main-header-text">
-            FITNESS, NO MATTER THE FORECAST
-          </h1>
-          <p class="lead">
-            <i>Be Unstoppable with Fit Forecast</i>
-          </p>
-        </div>
-      </div>
-    </section>
-    <main class="container-fluid">
-      <div class="row justify-content-center">
-        <aside class="card col-md-3 col-sm-12 weather-widget m-1">
-          <h2>The Weather Today</h2>
-          <!-- City name and today's date to be replaced dynamically in JS -->
-          <p>
-            <span class="city-name" id="city-name">London</span>,
-            <span class="today-date" id="today-date">01/01/2001</span>
-          </p>
-          <div class="weather-data">
-            <img
-              src="https://media.tenor.com/JBgYqrobdxsAAAAi/loading.gif"
-              alt="loading default"
-              id="weather-icon"
-              class="weather-icon"
-            />
-            <p id="temperature"></p>
-            <p id="humidity"></p>
-            <p id="wind"></p>
-
-            <!-- Boostrap form with one input field and submit/search button for custom location input -->
-            <form id="search-form" class="form">
-              <div class="form-inline form-group">
-                <div
-                  class="input-group d-flex flex-column justify-content-sm-around col-sm-12"
-                >
-                  <input
-                    class="form-input weather-search"
-                    type="text"
-                    id="search-input"
-                    placeholder="Add your city manually"
-                    aria-controls="today forecast"
-                  />
-                  <div class="input-group-append mt-3">
-                    <button
-                      type="submit"
-                      class="btn search-button w-100"
-                      id="search-button"
-                      aria-label="submit search"
-                    >
-                      Search
-                    </button>
-                  </div>
-                </div>
+        <!-- Add modal skeleton and modify their input data based on weather in JS -->
+        <!-- Modal for precipitation over 20% (For indoor workout)-->
+        <div class="modal fade" id="modalWet" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="modalWetTitle">
+                  Generate An Indoor Workout
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
               </div>
-            </form>
-            <!-- create weather icon dynamically in JS -->
-            <!-- create list items to display temperature and precipitation % dynamically in JS -->
-          </div>
-        </aside>
-        <div
-          class="card col-md-8 col-sm-12 modal-button-section m-1"
-          id="get-workout"
-        >
-          <h2>Generate your own workout based on the weather forecast...</h2>
-          <p>
-            For the busy professional seeking a fitness revolution, our app is
-            the key.
-            <br />
-            <br />
-            Tailored for fitness beginners and improvers who are tired of
-            weather excuses, it delivers personalized workouts anytime, anywhere
-            you may find yourself, based on the weather forecast. Whether it's
-            pouring cats and dogs, or boasting with sunshine, our innovative
-            solution helps you stay on track so you never miss a beat on your
-            fitness journey.
-            <br />
-            <br />
-            It's not just a workout; it's a commitment to your well-being.
-            Embrace a convenient, weather-proof fitness journey and gain more
-            than strength. Gain control over your health, no matter the
-            forecast.
-            <strong
-              >Your fitness, your terms: start your unstoppable journey today.
-            </strong>
-          </p>
-
-          <!-- MODAL TRIGGER BUTTON -->
-          <button
-            id="generateWorkoutBTN"
-            type="button"
-            class="btn modal-trigger-btn"
-            data-toggle="modal"
-            data-target="#modalDry"
-          >
-            Generate Workout
-          </button>
-          <!-- Add modal skeleton and modify their input data based on weather in JS -->
-          <!-- Modal for precipitation over 20% (For indoor workout)-->
-          <div
-            class="modal fade"
-            id="modalWet"
-            tabindex="-1"
-            role="dialog"
-            aria-labelledby="exampleModalLabel"
-            aria-hidden="true"
-          >
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="modalWetTitle">
-                    Generate An Indoor Workout
-                  </h5>
-                  <button
-                    type="button"
-                    class="close"
-                    data-dismiss="modal"
-                    aria-label="Close"
-                  >
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <p>
-                    Uh, oh! Looks like the weather isn't too great today. But
-                    you can still get the work in! Pick from the options below
-                    to generate your indoor workout.
-                  </p>
-                  <!-- Form with options for user parameters -->
-                  <!-- options for body part (muscle group) -->
-                  <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                      <label class="input-group-text" for="muscle-group-indoor"
-                        >Muscle Group</label
-                      >
-                    </div>
-                    <select class="custom-select" id="muscle-group-indoor">
-                      <option selected>Select one from below</option>
-                      <option value="back">back</option>
-                      <option value="cardio">cardio</option>
-                      <option value="chest">chest</option>
-                      <option value="lower arms">lower arms</option>
-                      <option value="lower legs">lower legs</option>
-                      <option value="neck">neck</option>
-                      <option value="shoulders">shoulders</option>
-                      <option value="upper arms">upper arms</option>
-                      <option value="upper legs">upper legs</option>
-                      <option value="waist">waist</option>
-                    </select>
+              <div class="modal-body">
+                <p>
+                  Uh, oh! Looks like the weather isn't too great today. But
+                  you can still get the work in! Pick from the options below
+                  to generate your indoor workout.
+                </p>
+                <!-- Form with options for user parameters -->
+                <!-- options for body part (muscle group) -->
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <label class="input-group-text" for="muscle-group-indoor">Muscle Group</label>
                   </div>
+                  <select class="custom-select" id="muscle-group-indoor">
+                    <option selected>Select one from below</option>
+                    <option value="back">back</option>
+                    <option value="cardio">cardio</option>
+                    <option value="chest">chest</option>
+                    <option value="lower arms">lower arms</option>
+                    <option value="lower legs">lower legs</option>
+                    <option value="neck">neck</option>
+                    <option value="shoulders">shoulders</option>
+                    <option value="upper arms">upper arms</option>
+                    <option value="upper legs">upper legs</option>
+                    <option value="waist">waist</option>
+                  </select>
+                </div>
 
-                  <!-- options for equipment -->
-                  <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                      <label class="input-group-text" for="equipment-indoor"
-                        >Equipment</label
-                      >
-                    </div>
-                    <select class="custom-select" id="equipment-indoor">
-                      <option selected>Select one from below</option>
-                      <option value="barbell">barbell</option>
-                      <option value="body weight">
-                        body weight, = No Equipment
-                      </option>
-                      <option value="cable">cable</option>
-                      <option value="dumbbell">dumbbell</option>
-                      <option value="kettlebell">kettlebell</option>
-                      <option value="resistance band">resistance band</option>
-                      <option value="weighted">weighted</option>
-                    </select>
+                <!-- options for equipment -->
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <label class="input-group-text" for="equipment-indoor">Equipment</label>
                   </div>
+                  <select class="custom-select" id="equipment-indoor">
+                    <option selected>Select one from below</option>
+                    <option value="barbell">barbell</option>
+                    <option value="body weight">
+                      body weight, = No Equipment
+                    </option>
+                    <option value="cable">cable</option>
+                    <option value="dumbbell">dumbbell</option>
+                    <option value="kettlebell">kettlebell</option>
+                    <option value="resistance band">resistance band</option>
+                    <option value="weighted">weighted</option>
+                  </select>
+                </div>
 
-                  <!-- Modal footer with buttons -->
-                </div>
-                <div class="modal-footer">
-                  <button
-                    type="button"
-                    class="btn close-btn"
-                    data-dismiss="modal"
-                  >
-                    Close
-                  </button>
-                  <button type="button" data-dismiss="modal" class="btn generate-workout-btn" id="generate-workout-indoor">
-                    Generate Workout
-                  </button>
-                </div>
+                <!-- Modal footer with buttons -->
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn close-btn" data-dismiss="modal">
+                  Close
+                </button>
+                <button type="button" data-dismiss="modal" class="btn generate-workout-btn"
+                  id="generate-workout-indoor">
+                  Generate Workout
+                </button>
               </div>
             </div>
           </div>
+        </div>
 
-          <!-- Modal for precipitation under 20% (For outdoor workouts)-->
-          <div
-            class="modal fade"
-            id="modalDry"
-            tabindex="-1"
-            role="dialog"
-            aria-labelledby="exampleModalLabel"
-            aria-hidden="true"
-          >
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="modalDryTitle">
-                    Generate An Outdoor Workout
-                  </h5>
-                  <button
-                    type="button"
-                    class="close"
-                    data-dismiss="modal"
-                    aria-label="Close"
-                  >
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <p>
-                    The weather seems dry enough to workout outdoors! Pick from
-                    the options below to generate your outdoor workout.
-                  </p>
-                  <!-- Form with options for user parameters -->
-                  <!-- options for body part (muscle group) -->
-                  <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                      <label class="input-group-text" for="exerciseChoice"
-                        >Type of Exercise</label
-                      >
-                    </div>
-                    <select class="custom-select" id="exerciseChoice">
-                      <option selected>Select one from below</option>
-                      <option value="running">running</option>
-                      <option value="walking">walking</option>
-                      <option value="cycling">cycling</option>
-                      <option value="wheelchair">wheelchair racing</option>
-                    </select>
+        <!-- Modal for precipitation under 20% (For outdoor workouts)-->
+        <div class="modal fade" id="modalDry" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="modalDryTitle">
+                  Generate An Outdoor Workout
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>
+                  The weather seems dry enough to workout outdoors! Pick from
+                  the options below to generate your outdoor workout.
+                </p>
+                <!-- Form with options for user parameters -->
+                <!-- options for body part (muscle group) -->
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <label class="input-group-text" for="exerciseChoice">Type of Exercise</label>
                   </div>
+                  <select class="custom-select" id="exerciseChoice">
+                    <option selected>Select one from below</option>
+                    <option value="running">running</option>
+                    <option value="walking">walking</option>
+                    <option value="cycling">cycling</option>
+                    <option value="wheelchair">wheelchair racing</option>
+                  </select>
+                </div>
 
-                  <!-- options for equipment -->
-                  <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                      <label class="input-group-text" for="selectedTime"
-                        >Duration</label
-                      >
-                    </div>
-                    <select class="custom-select" id="selectedTime">
-                      <option selected>Select from below</option>
-                      <option value="15 min">15 min</option>
-                      <option value="30 min">30 min</option>
-                      <option value="45 min">45 min</option>
-                      <option value="60 min">60 min</option>
-                      <option value="75 min">75 min</option>
-                      <option value="90 min">90 min</option>
-                    </select>
+                <!-- options for equipment -->
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <label class="input-group-text" for="selectedTime">Duration</label>
                   </div>
+                  <select class="custom-select" id="selectedTime">
+                    <option selected>Select from below</option>
+                    <option value="15 min">15 min</option>
+                    <option value="30 min">30 min</option>
+                    <option value="45 min">45 min</option>
+                    <option value="60 min">60 min</option>
+                    <option value="75 min">75 min</option>
+                    <option value="90 min">90 min</option>
+                  </select>
                 </div>
-                <div class="modal-footer">
-                  <button
-                    type="button"
-                    class="btn close-btn"
-                    data-dismiss="modal"
-                  >
-                    Close
-                  </button>
-                  <button 
-                  id="generate-workout-outdoor" 
-                  type="button" 
-                  data-dismiss="modal"
-                  class="btn">Generate Workout</button>
-                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn close-btn" data-dismiss="modal">
+                  Close
+                </button>
+                <button id="generate-workout-outdoor" type="button" data-dismiss="modal" class="btn">Generate
+                  Workout</button>
               </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
 
-      <!-- Main section -->
-    </main>
-    <section class="custom-workout-section" id="custom-workout">
-      <h2 class="text-center" id="your-custom-workout">Your Custom Workout</h2>
-      <!-- Boostrap slider to display exercises here ; title of exercise is <h3>-->
-        <p id="customWorkoutPlaceholder" class="text-center"><i>Please click on 'Generate Workout' above to display your custom workout here.</i></p>
-        <div
-  id="customExercisesCarousel"
-  class="carousel carousel-dark slide hidden"
-  data-bs-ride="carousel"
->
-  <div class="carousel-inner">
-    <div class="carousel-item active" data-bs-interval="10000">
-      <!-- slide 1 content -->
-      <div class="container-fluid">
-        <div class="row justify-content-center">
-          <div class="col-sm-5 exercise-instructions">
-            <h3 id="exercise-title0">Exercise title</h3>
-            <ol id="exercise-instruction0">
-              <li>Step1</li>
-              <li>Step 2</li>
-              <li>Step 3</li>
-              <li>Step 4</li>
-              <li>Step 5</li>
-            </ol>
+    <!-- Main section -->
+  </main>
+  <section class="custom-workout-section" id="custom-workout">
+    <h2 class="text-center" id="your-custom-workout">Your Custom Workout</h2>
+    <!-- Boostrap slider to display exercises here ; title of exercise is <h3>-->
+    <p id="customWorkoutPlaceholder" class="text-center"><i>Please click on 'Generate Workout' above to display your
+        custom workout here.</i></p>
+    <div id="customExercisesCarousel" class="carousel carousel-dark slide hidden" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active" data-bs-interval="10000">
+          <!-- slide 1 content -->
+          <div class="container-fluid">
+            <div class="row justify-content-center">
+              <div class="col-sm-5 exercise-instructions">
+                <h3 id="exercise-title0">Exercise title</h3>
+                <ol id="exercise-instruction0">
+                  <li>Step1</li>
+                  <li>Step 2</li>
+                  <li>Step 3</li>
+                  <li>Step 4</li>
+                  <li>Step 5</li>
+                </ol>
+              </div>
+              <div class="col-sm-4 exercise-gif">
+                <img src="./assets/images/06851301-Run_Cardio-FIX_360.gif" alt="exercise gif" id="exercise-gif0" />
+              </div>
+            </div>
           </div>
-          <div class="col-sm-4 exercise-gif">
-            <img src="./assets/images/06851301-Run_Cardio-FIX_360.gif" alt="exercise gif" id="exercise-gif0"/>
+        </div>
+        <div class="carousel-item" data-bs-interval="10000">
+          <!-- slide 2 content -->
+          <div class="container-fluid">
+            <div class="row justify-content-center">
+              <div class="col-sm-5 exercise-instructions">
+                <h3 id="exercise-title1">Exercise title</h3>
+                <ol id="exercise-instruction1">
+                  <li>Step1</li>
+                  <li>Step 2</li>
+                  <li>Step 3</li>
+                  <li>Step 4</li>
+                  <li>Step 5</li>
+                </ol>
+              </div>
+              <div class="col-sm-4 exercise-gif">
+                <img src="./assets/images/17771301-Above-Head-Chest-Stretch_Chest_360.gif" alt="exercise gif"
+                  id="exercise-gif1" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item" data-bs-interval="10000">
+          <!-- slide 3 content -->
+          <div class="container-fluid">
+            <div class="row justify-content-center">
+              <div class="col-sm-5 exercise-instructions">
+                <h3 id="exercise-title2">Exercise title</h3>
+                <ol id="exercise-instruction2">
+                  <li>Step1</li>
+                  <li>Step 2</li>
+                  <li>Step 3</li>
+                  <li>Step 4</li>
+                  <li>Step 5</li>
+                </ol>
+              </div>
+              <div class="col-sm-4 exercise-gif">
+                <img src="./assets/images/19801301-Across-Chest-Shoulder-Stretch_Back-FIX_360.gif" alt="exercise gif"
+                  id="exercise-gif2" />
+              </div>
+            </div>
           </div>
         </div>
       </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#customExercisesCarousel"
+        data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <!-- <span class="visually-hidden">Previous</span> -->
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#customExercisesCarousel"
+        data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <!-- <span class="visually-hidden">Next</span> -->
+      </button>
     </div>
-    <div class="carousel-item" data-bs-interval="10000">
-      <!-- slide 2 content -->
-      <div class="container-fluid">
-        <div class="row justify-content-center">
-          <div class="col-sm-5 exercise-instructions">
-            <h3 id="exercise-title1">Exercise title</h3>
-            <ol id="exercise-instruction1">
-              <li>Step1</li>
-              <li>Step 2</li>
-              <li>Step 3</li>
-              <li>Step 4</li>
-              <li>Step 5</li>
-            </ol>
-          </div>
-          <div class="col-sm-4 exercise-gif" >
-            <img src="./assets/images/17771301-Above-Head-Chest-Stretch_Chest_360.gif" alt="exercise gif" id="exercise-gif1" />
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="carousel-item" data-bs-interval="10000">
-      <!-- slide 3 content -->
-      <div class="container-fluid">
-        <div class="row justify-content-center">
-          <div class="col-sm-5 exercise-instructions">
-            <h3 id="exercise-title2">Exercise title</h3>
-            <ol id="exercise-instruction2">
-              <li>Step1</li>
-              <li>Step 2</li>
-              <li>Step 3</li>
-              <li>Step 4</li>
-              <li>Step 5</li>
-            </ol>
-          </div>
-          <div class="col-sm-4 exercise-gif" >
-            <img src="./assets/images/19801301-Across-Chest-Shoulder-Stretch_Back-FIX_360.gif" alt="exercise gif" id="exercise-gif2"/>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <button
-    class="carousel-control-prev"
-    type="button"
-    data-bs-target="#customExercisesCarousel"
-    data-bs-slide="prev"
-  >
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <!-- <span class="visually-hidden">Previous</span> -->
-  </button>
-  <button
-    class="carousel-control-next"
-    type="button"
-    data-bs-target="#customExercisesCarousel"
-    data-bs-slide="next"
-  >
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <!-- <span class="visually-hidden">Next</span> -->
-  </button>
-</div>
 
-<!-- separating custom workout from past workout section -->
-<hr>
+    <!-- separating custom workout from past workout section -->
+    <hr>
 
     <section class="past-workout-section mt-4" id="past-workout">
       <h2 class=" text-center">Past Workout</h2>
 
-      <p class="text-center"><i>Once you have generated a workout more than once, the latest workout set you generated will be shown below. You can see each exercise's instructions by clicking on 'Show Exercise'.</i></p>
+      <p class="text-center"><i>Once you have generated a workout more than once, the latest workout set you generated
+          will be shown below. You can see each exercise's instructions by clicking on 'Show Exercise'.</i></p>
       <div class="container-fluid">
         <div class="row justify-content-center text-center">
 
@@ -474,65 +377,56 @@
           </div>
         </div>
       </div>
-<!-- Section similar to exercise slider to display exercise when past exercise div is clicked, hidden otherwise; exercise titles are <h3>-->
+      <!-- Section similar to exercise slider to display exercise when past exercise div is clicked, hidden otherwise; exercise titles are <h3>-->
       <div id="pastExerciseSlider" class="card col-12 hidden mt-4">
-      <div class="container-fluid  justify-content-center">
-        <div class="row justify-content-center">
-          <div class="col-sm-5 exercise-instructions">
-            <h3 id="pastTitle">Exercise title</h3>
-            <ol id="pastInstructions">
-              <li>Step1</li>
-              <li>Step 2</li>
-              <li>Step 3</li>
-              <li>Step 4</li>
-              <li>Step 5</li>
-            </ol>
-          </div>
-          <div class="col-sm-4 exercise-gif">
-            <img id="pastGif" src="./assets/images/17771301-Above-Head-Chest-Stretch_Chest_360.gif" alt="exercise gif" />
+        <div class="container-fluid  justify-content-center">
+          <div class="row justify-content-center">
+            <div class="col-sm-5 exercise-instructions">
+              <h3 id="pastTitle">Exercise title</h3>
+              <ol id="pastInstructions">
+                <li>Step1</li>
+                <li>Step 2</li>
+                <li>Step 3</li>
+                <li>Step 4</li>
+                <li>Step 5</li>
+              </ol>
+            </div>
+            <div class="col-sm-4 exercise-gif">
+              <img id="pastGif" src="./assets/images/17771301-Above-Head-Chest-Stretch_Chest_360.gif"
+                alt="exercise gif" />
+            </div>
           </div>
         </div>
       </div>
-    </div>
     </section>
 
     <div class="container">
       <footer class="py-3 my-4 footer">
         <ul class="nav justify-content-center border-bottom pb-3 mb-3">
           <li class="nav-item text-center col-12">
-            <p>Project created by Alexandra Asanache, Alina-cristi Osipov, Lotanna Amobi and Dean Waring.</p>
+            <p></p>
           </li>
           <li class="nav-item text-center col-12">
             <p>
-             <a
-                  href="https://github.com/Tannababy/FitForecast"
-                  target="_blank"
-                  >Check out the Github Repository</a
-                ></a
-              >
+              <a href="https://github.com/DeanWaringDev/fitforcast" target="_blank">Check out the Github
+                Repository</a></a>
             </p>
           </li>
         </ul>
         <p class="text-center text-body-secondary">
-          © Ace Coders Team 2023-2024
+          ©2023-2024
         </p>
       </footer>
     </div>
-    <script
-      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
       integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+      crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
       integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+      crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
       integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-      crossorigin="anonymous"
-    ></script>
+      crossorigin="anonymous"></script>
     <!-- Day.js -->
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
     <!-- jQuery -->
@@ -543,5 +437,6 @@
     <script src="./assets/js/exerciseBank.js"></script>
     <script src="./assets/js/exercises.js"></script>
     <script src="./assets/js/app.js"></script>
-  </body>
+</body>
+
 </html>
